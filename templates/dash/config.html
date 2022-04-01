@@ -15,10 +15,12 @@
     <link rel="stylesheet" href="{% static 'dash/assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
     <link rel="stylesheet" href="{% static 'dash/assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
     <link rel="stylesheet" href="{% static 'dash/assets/css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/pages/auth.css' %}">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
 </head>
 
 <body>
+    {% block sidebar %}
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
@@ -44,15 +46,23 @@
                         </li>
 
                         <li class="sidebar-item ">
-                            <a href="#" class='sidebar-link'>
+                            <a href="" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
-                                <span>Components</span>
+                                <span>Messages </span>
+                                <!-- <span class="badge badge-danger" >0</span> -->
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item ">
+                            <a href="" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Deposits</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
                             <a href="" class='sidebar-link'>
                                 <i class="bi bi-chat-dots-fill"></i>
-                                <span>Chat</span>
+                                <span>Withdraws</span>
                             </a>
                         </li>
                         <li class="sidebar-item  has-sub">
@@ -62,7 +72,7 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="">Logout</a>
+                                    <a href="{% url 'logout' %}">Logout</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a href="">Forgot Password</a>
@@ -75,9 +85,11 @@
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
         </div>
+        {% endblock sidebar %}
         {% block contents %}
         {% endblock contents %}
      
+{% block footer  %}
 
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
@@ -86,6 +98,7 @@
                     </div>
                 </div>
             </footer>
+{% endblock footer %}
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
