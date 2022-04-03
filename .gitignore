@@ -1,4 +1,4 @@
 *.env
 *pyc
 *__pycache__*
-db.sqlite2
+db.sqlite3
