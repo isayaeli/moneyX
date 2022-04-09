@@ -1,62 +1,164 @@
-{% extends 'dash/config.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block sidebar%}
-{% endblock sidebar %}
+
+{% block hero %}
+{% endblock hero %}
 {% block contents %}
-    <div id="auth">
 
-        <div class="row h-100">
-            <div class="col-lg-8 col-12">
-                <div id="auth-left" style="width: 60%; margin-left: 40%;" >
-                    <div class="auth-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"></a>
-                    </div>
-                    <h1 class="auth-title">Log in.</h1>
-                    <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
+<style>
+    #header{
+        display: none;
+    }
+    .breadcrumbs{
+        margin-top: 0;
+    }
 
-                    <form action="{% url 'login' %}" method="post">
-                        {% csrf_token %}
+</style>
 
-                        {% if request.GET.next %}
-                        <input type="hidden" class="form-control" name="next" value="{{request.GET.next}}">
-                        {% endif %}
 
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input name="username" type="text" class="form-control form-control-xl" placeholder="username">
-                            <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li>Login</li>
+        </ol>
+        <h2>Login</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+       <!-- ======= Contact Section ======= -->
+       <section id="contact" class="contact">
+
+        <div class="container" data-aos="fade-up">
+            
+          <header class="section-header">
+            <div class="row">
+            <center>
+                <div class="col-md-4">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                            <div id="noto" style="width: 100%;" class="justify-content-start alert alert-danger alert-dismissible fade show" role="alert">
+                                {{message}}
+                                
                             </div>
-                        </div>
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input name="password" type="password" class="form-control form-control-xl" placeholder="password">
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
+                
+                            {% endif %}
+                            {% if message.tags == 'success' %}
+                            <div id="noto" style="width: 100%;"  class="justify-content-start alert alert-success alert-dismissible fade show" role="alert">
+                                {{message}}
+                               
                             </div>
-                        </div>
-                        <div class="form-check form-check-lg d-flex align-items-end">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
-                                show password
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
-                    </form>
-                    <div class="text-center mt-5 text-lg fs-4">
-                        <p class="text-gray-600">Don't have an account? <a href=""
-                                class="font-bold">Sign
-                                up</a>.</p>
-                        <p><a class="font-bold" href="">Forgot password?</a>.</p>
-                    </div>
+                
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
+            </center>
             </div>
-            <div class="col-lg-4 d-none d-lg-block">
-                <div id="auth-right">
+            <!-- <h2>Login</h2> -->
+            <p>Login</p>
+          </header>
+  
+          <div class="row gy-4 text-center">
+  
+            <!-- <div class="col-lg-6">
+  
+              <div class="row gy-4">
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <i class="bi bi-geo-alt"></i>
+                    <h3>Address</h3>
+                    <p>255 DSM Street,<br>Tanzania Dsm</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <i class="bi bi-telephone"></i>
+                    <h3>Call Us</h3>
+                    <p>+255 1234567<br>+255 123456</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <i class="bi bi-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>info@example.com<br>contact@example.com</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <i class="bi bi-clock"></i>
+                    <h3>Open Hours</h3>
+                    <p>Monday - Friday<br>9:00AM - 05:00PM</p>
+                  </div>
+                </div>
+              </div>
+  
+            </div> -->
+            <center>
+                <div class="col-lg-4">
+                  <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
 
-                </div>
-            </div>
+                    {% if request.GET.next %}
+                    <input type="hidden" class="form-control" name="next" value="{{request.GET.next}}">
+                    {% endif %}
+                    <div class="row gy-4">
+      
+                      <div class="col-md-12 mb-3">
+                        <input style="height: 50px;" type="text" name="username" class="form-control" placeholder="Your Username" required>
+                      </div>
+                    </div>
+      
+                    <div class="row gy-4 mb-3">
+                      <div class="col-md-12 ">
+                        <input style="height: 50px;" type="password" class="form-control" name="password" placeholder="Your Password" required>
+                      </div>
+                    </div>
+      
+                     
+                    <div class="row gy-4 mb-3">
+                      <div class="col-md-12 text-center">
+                        <button style="width: 100%;" class="btn btn-primary btn-lg rounded-pill" type="submit">Login Now</button>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span>Don't have an account? <a href="{% url 'register' %}"><b>Register here</b></a></span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>Forgot Your Password? <a href="{% url 'password_reset' %}"><b>Reset here</b></a></span>
+                      </div>
+                    </div>
+      
+                    </div>
+                  </form>
+                  
+      
+                </div></center>
+  
+          </div>
+  
         </div>
+  
+      </section><!-- End Contact Section -->
 
-        {% endblock contents %}
+  </main><!-- End #main -->
 
-        {% block footer %}
-        {% endblock footer %}
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+    $('#noto').delay(5000).fadeOut('slow');
+  </script>
+
+{% endblock contents %}
+
+{% block footer %}
+{% endblock footer %}

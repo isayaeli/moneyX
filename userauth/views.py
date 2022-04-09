@@ -17,8 +17,8 @@ def register_request(request):
             else:
                 user = form.save()
                 login(request, user)
-                # messages.success(request, "Successful Registered!")
-                return redirect('home')
+                messages.success(request, "Successful Registered! Login Now")
+                return redirect('login')
     else:
         form = registerForm()
     context = {
@@ -54,4 +54,4 @@ def login_request(request):
 def logout_request(request):
     logout(request)
     messages.success(request,f"Logged out successful!")
-    return redirect('home')
+    return redirect('login')

@@ -1,0 +1,59 @@
+{% extends 'dash/config.html' %}
+{% load static %}
+{% block contents %}
+<div id="main">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+
+    <div class="page-heading">
+        <h3>Welcome to your Dashboard</h3>
+    </div>
+    <div class="page-content">
+        <section class="row">
+            <div class="col-12 col-lg-9">
+        
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>List Of Deposits</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-responsive">
+                                    <thead>
+                                        <th>#</th>
+                                        <th>Amount</th>
+                                        <th>Deposited On</th>
+                                        <th>Currecy Of Transaction</th>
+                                        <th>From</th>
+                                    </thead>
+                                    <tbody>
+                                        <td>1</td>
+                                        <td>2000</td>
+                                        <td> 22, March 2022</td>
+                                        <td>USD</td>
+                                        <td>Bitcoin</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Ads Section</h4>
+                    </div>
+                    <div class="card-body">
+                        No New Ad Added for now
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    {% endblock contents %}
