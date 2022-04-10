@@ -7,3 +7,7 @@ def index(request):
 
 def deposits(request):
     return render(request,'dash/deposits.html')
+
+
+def withdraws(request):
+    return render(request,'dash/withdraws.html')
