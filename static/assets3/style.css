@@ -1,0 +1,334 @@
+html{
+    scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: extrabold;
+    src: url(Poppins/Poppins-ExtraBold.ttf);
+}
+
+@font-face {
+font-family: mediumfont;
+src: url(Poppins/Poppins-Medium.ttf);
+}
+
+@font-face {
+font-family: popins;
+src: url(Poppins/Poppins-Regular.ttf);
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: popins;
+    background-color: #121212;
+    overflow-x: hidden;
+}
+header{
+    width: 100%;
+    z-index: 1;
+    position: fixed;
+}
+nav{
+    display: inline-flex;
+    background-color: #121212;
+    height: 80px;
+    width: 100%;
+   
+}
+
+
+
+ul{
+    list-style: none;
+    height: 80px;
+    width: 100%;
+}
+
+ul li:nth-child(1){
+    margin-left: 190px;
+}
+.nav ul li a{
+    text-decoration: none;
+}
+
+
+ul li{
+    list-style: none;
+    float: left;
+    color: white;
+    margin: 30px 20px 20px 20px;
+    
+}
+li a{
+    color:white;
+    text-decoration: none;
+}
+
+.right-nav-items{
+    float: right;
+    position: absolute;
+    right: 210px;  
+    display: inline-flex;
+}
+.right-nav-items li{
+    margin: 30px 20px;
+    list-style: none;
+}
+.right-nav-items li a{
+    text-decoration: none;
+}
+.right-nav-items .auth-btn {
+    margin: -8px 20px 10px 0px;
+}
+.bottom-line{
+    background-color: #313131;
+    height: .5px;
+    margin-left: 220px;
+    margin-right: 250px;
+}
+
+.sidenav{
+    display: block;
+    margin-left: 220px;
+    margin-top: 150px;
+    position: fixed;
+}
+.sidenav  li{
+    list-style: none;
+    color: white;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.exch{
+    margin-bottom: 100px;
+}
+
+.contents{
+    margin-left: 10px;
+    margin-top: 170px;
+    z-index: 1;
+}
+.exchange{
+    height: auto;
+    width: auto;
+    background-color: white;
+    border-radius: 10px;
+}
+.exchange span{
+    padding: 20px;
+}
+.exchange label{
+    padding: 20px;
+}
+
+.exchange form input{
+    width: 60%;
+    margin: 15px;
+}
+
+.headline h2{
+    font-size: 50px;
+    font-family: extrabold;
+    color: white;
+    margin-bottom: 20px;
+}
+ .headline span{
+    color:white;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-size: 20px;
+ }
+ .app-stores{
+     margin-bottom: 20px;
+    margin-top: 20px;
+ }
+ .input{
+    margin-top: 20px;
+    background-color: #eee;
+ }
+ .input span{
+    top: 50px;
+    position: absolute;
+    line-height: 18px;
+    margin-left: 8px;
+    font-size: 13px;
+    font-weight: bold;
+   
+ }
+
+ #recieve{
+    top: 170px;
+    position: absolute;
+    line-height: 18px;
+    margin-left: 8px;
+    font-size: 13px;
+    font-weight: bold;
+ }
+ 
+
+ .input input{
+    color: black;
+    font-weight: bold;
+    border:0px;
+    border-bottom:2px solid #eee;
+    height: 50px;
+    background-color: transparent;
+    padding-top: 20px;
+   
+ }
+.input select{
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: black;
+    height: 50px;
+}
+.exchange-btn{
+    width: 93%;
+    padding: 10px 10px 10px 10px;
+    margin: 20px 5px 10px 10px;
+}
+.exchange small{
+    margin: 20px;
+}
+
+ input:focus, input.form-control:focus {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+hr{
+    background-color:#313131;
+}
+
+.pair{
+    height:  200px;
+    background-color: #303030;
+    margin-bottom: 30px;
+    border-radius:10px;
+}
+
+.pair h1{
+    color: white;
+    padding: 20px 0px 0px 20px;
+    font-size: 25px;
+    font-family: extrabold;
+}
+
+.pair h1 i{
+    font-weight: 100;
+    margin: 0 10px 0 10px;
+}
+h2{
+    font-family: extrabold;
+    font-size: 35px;
+}
+.more a{
+    color:white;
+    border-bottom: 1px solid white;
+    text-decoration: none;
+}
+.why{
+    background-color: #303030;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.why .img{
+    margin: 5px 0px;
+}
+
+.texts h4{
+    font-family: mediumfont;
+    color: white;
+    font-weight: 900;
+    margin: 30px;
+    font-size: 22px;
+}
+.texts h4:nth-child(2){
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+.why p{
+    color:#9c9c9c;
+    margin: 30px 30px 30px 30px;
+    font-size: 15px;
+}
+
+
+.how{
+    background-color: #303030;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.how .number img{
+    margin: 35px 10px 5px 40px;
+}
+
+.how p{
+    color:#9c9c9c;
+    margin: 30px 30px 30px 30px;
+    font-size: 15px;
+}
+
+.footer{
+    background-color: #303030;
+    width: 100%;
+    /* height: 70px; */
+    bottom: 0;
+    left: 0;
+}
+.footer ul{
+    margin: 10px 0px 10px 180px;
+}
+.socials ul li{
+    background-color: white;
+    border-radius: 50px;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    margin: 20px 0px 10px 15px;
+    display: inline-flex;
+}
+
+.socials ul li a{
+    color: black;
+    /* line-height: 35px; */
+    text-align: center;
+    margin: 7px 10px 10px 10px;
+}
+
+.footer p{
+    color: white;
+    font-size: 20px;
+    margin-top: 35px;
+
+}
+
+.up-btn{
+    display: block;
+    position: fixed;
+    bottom: 180px;
+    left: 220px;
+    font-weight: 900;
+}
+
+.app{
+    align-content: center;
+}
+.app p{
+    text-align: start;
+    color: white;
+    /* text-indent: 20px; */
+}
+.app ol{
+    text-align: start;
+    left: 0;
+}
+.app ol li{
+    color: white;
+}
