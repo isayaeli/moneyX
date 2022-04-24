@@ -1,448 +1,258 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoneyX</title>
-    {% load static %}
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'assets3/style.css' %}">
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'assets3/aos/aos.css' %}">
-    
-</head>
-<body>
-    <header>
-        <nav class="nav">
-           <ul>
-               <li>
-                   <a href="">
-                       <!-- <img style="height: 40px; width: 40px;" src="" alt=""> -->
-                       MoneyX
-                   </a>
-                </li>
-                <li><a href="">Exchange</a></li>
-                <li><a href="">More</a></li>
-           </ul>
-           <div class="right-nav-items">
-               <li><a href="">About Us</a></li>
-               <li><a href="">Contact Us</a></li>
-               <li><a class=" auth-btn btn btn-outline-primary rounded-pill" href="{% url 'login' %}">Get Started</a></li>
-           </div>
-        </nav>
-        <div class="bottom-line">.</div>
-    </header>
+{% extends 'base.html' %}
+{% load static %}
 
-    <main>
-        <div class="row ">
-            <div class="col-md-4">
-                <div class="sidenav" >
-                    <li class="side-link" >Exchange</li>
-                    <li class="side-link" >Buy</li>
-                    <li class="side-link" >Sell</li>
-                </div>
-               <div class="up-btn">
-                <button class="btn btn-outline-primary rounded-pill" >Scroll Top <i class="fa fa-long-arrow-up ml-1" ></i></button>
-                <br> <br>
-                <span class="text-white mr-2" >The best crypto <br> exchnage platfom</span>
-                <br> <br>
-                <i class="fa fa-star-o text-primary" ></i>
-                <i class="fa fa-star-o text-primary" ></i>
-                <i class="fa fa-star-o text-primary" ></i>
-                <i class="fa fa-star-o text-primary" ></i>
-                <i class="fa fa-star-o text-primary" ></i>
-                <i class="fa fa-star-o text-primary" ></i>
-                <span class="text-white ml-1" >5.0</span>
-               </div>
-            </div>
-            <div class="col-md-6  ">
-                <div class="contents">
-                    <div class="row exch" data-aos="fade-up">
-                        <div class="col-md-6">
-                            <div class="exchange" >
-                                <br>
-                                <span>Fixed Rate</span>
-                                <form action="">
-                                    <div class="input">
-                                        <span>You send</span>
-                                        <div style="display:inline-flex;">
-                                            <input type="number" placeholder="You send" class="form-control">
-                                            <select style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
-                                                <option value="ETH">ETH</option>
-                                                <option value="BTC">BTC</option>
-                                                <option value="ETH">USDT</option>
-                                                <option value="ETH">USDC</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                   <small class="mt-3" >1 BTC ~ 13.49010526 ETH - All fees <a href="">included</a></small>
-                                    <div class="input">
-                                        <span id="recieve" >You get</span>
-                                        <div style="display:inline-flex;">
-                                            <input type="number" placeholder="You get" class="form-control mt-3">
-                                            <select style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
-                                                <option value="ETH">BTC</option>
-                                                <option value="BTC">ETH</option>
-                                                <option value="ETH">USDT</option>
-                                                <option value="ETH">USDC</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <button class="exchange-btn btn btn-primary btn-lg rounded-pill mb-3" >Exchange now</button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="headline">
-                                <h2>Exchange any <br> crypto <br> instantly.</h2>
-                                <span>Exchange Bitcoin and 200+ altcoins in a fast, simple and secure way.</span>
-                                <div class="app-stores" style="display: inline-flex;">
-                                    <img height="50" width="100" src="../static/assets3/img/gp.svg" alt="">
-                                    <img height="50" width="100" src="../static/assets3/img/apple.svg" alt="">
-                                    <img height="50" width="100" src="../static/assets3/img/apk.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <h2 class="mt-5 text-white">Popular exchange pairs</h2>
-                    <div class="row mt-5" data-aos="fade-left">
-                       
-                        <div class="col-md-6">
-                            <div class="pair">
-                                <h1>ETH <i class="fa fa-long-arrow-right"></i> BTC</h1>
-                                <div class="mt-3 mb-3" style="height: 90px;" >
-                                    <canvas width="400" height="100" id="myChart"></canvas>
-                                </div>
-                                <div class="percent ml-3 mt-2">
-                                    <span class="text-success" >0.38%</span> <small class="text-white">last month</small>
-                                </div>
-                            </div>
-                          
-                        </div>
-                        <div class="col-md-6">
-                            <div class="pair">
-                                <h1>BTC <i class="fa fa-long-arrow-right"></i> ETH</h1>
-                                <div class="mt-3 mb-3" style="height: 90px;" >
-                                    <canvas width="400" height="100" id="myChart2"></canvas>
-                                </div>
-                                <div class="percent ml-3 mt-2">
-                                    <span class="text-danger" > -0.38%</span> <small class="text-white">last month</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="pair">
-                                <h1>BTC <i class="fa fa-long-arrow-right"></i> XMR</h1>
-                                <div class="mt-3 mb-3" style="height: 90px;" >
-                                    <canvas width="400" height="100" id="myChart3"></canvas>
-                                </div>
-                                <div class="percent ml-3 mt-2">
-                                    <span class="text-danger" >-0.38%</span> <small class="text-white">last month</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="pair">
-                                <h1>DODGE <i class="fa fa-long-arrow-right"></i> BTC</h1>
-                                <div class="mt-3 mb-3" style="height: 90px;" >
-                                    <canvas width="400" height="100" id="myChart4"></canvas>
-                                </div>
-                                <div class="percent ml-3 mt-2">
-                                    <span class="text-success" >0.38%</span> <small class="text-white">last month</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <center><span class="more" ><a href="">Show more</a></span></center>
-                    <hr>
-                    <h2 class="mt-5 text-white">Why MoneyX</h2>
-                    <div class="row mt-5 mb-5" data-aos="fade-right">
-                        <div class="col-md-6 mt-4">
-                            <div class="why">
-                                <div class="img">
-                                    <img src="../static/assets3/img/clock.png" alt="">
-                                </div>
-                                <div class="texts">
-                                    <h4>24/7</h4>
-                                    <h4>Live support</h4>
-                                </div>
-                                <p>Our dedicated support team is always ready to assist you with any questions regarding crypto exchanges.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mt-4">
-                            <div class="why">
-                                <div class="img">
-                                    <img src="../static/assets3/img/stars.png" alt="">
-                                </div>
-                                <div class="texts">
-                                    <h4>Competitive Rate</h4>
-                                    <h4>on the market</h4>
-                                </div>
-                                <p>We work with a variety of crypto trading platforms in order to find the best offer on the market for you.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mt-4">
-                            <div class="why">
-                                <div class="img">
-                                    <img src="../static/assets3/img/arrows.png" alt="">
-                                </div>
-                                <div class="texts">
-                                    <h4>Speedy</h4>
-                                    <h4>Transactions</h4>
-                                </div>
-                                <p>We achieved an average transaction speed of 25-40 minutes to ensure you get the best out of the crypto market.</p>
-                            </div>
-                        </div>
-                         <div class="col-md-6 mt-4">
-                            <div class="why">
-                                <div class="img">
-                                    <img src="../static/assets3/img/cards.png" alt="">
-                                </div>
-                                <div class="texts">
-                                    <h4>Security</h4>
-                                    <h4>of your funds</h4>
-                                </div>
-                                <p>We do not store cryptocurrencies. Coins are sent directly to your wallet after the exchange.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <h2 class="mt-5 text-white">How to exchange cryptocurrency</h2>
-                    <div class="row mt-5 mb-5" data-aos="fade-up">
-                        <div class="col-md-6 mb-4">
-                            <div class="how">
-                                <div class="number">
-                                    <img src="../static/assets3/img/one.svg" alt="">
-                                </div>
-                                <div class="texts">
-                                    <h4>Choose the crypto</h4>
-                                    <h4>you’d like to exchange</h4>
-                                </div>
-                                <p>Select the cryptocurrency pair you’d like to exchange. When using MoneyX, you can exchange digital assets at either fixed or floating rates.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="how">
-                                <div class="number">
-                                    <img src="../static/assets3/img/two.svg" alt="">
-                                </div>
-                                <div class="texts">
-                                    <h4>Enter your crypto</h4>
-                                    <h4>wallet address</h4>
-                                </div>
-                                <p>Enter the address of the crypto wallet that your new cryptocurrency will be sent to.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="how">
-                                <div class="number">
-                                    <img src="../static/assets3/img/three.svg" alt="">
-                                </div>
-                                <div class="texts">
-                                    <h4>Create an account in</h4>
-                                    <h4>just a few clicks</h4>
-                                </div>
-                                <p>Sign up/Log in to your MoneyX account to track the transaction details. Register with either your Facebook/Twitter/Google account or your email address.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="how">
-                                <div class="number">
-                                    <img src="../static/assets3/img/four.svg" alt="">
-                                </div>
-                                <div class="texts">
-                                    <h4>Receive your crypto</h4>
-                                    <!-- <h4>you’d like to exchange</h4> -->
-                                </div>
-                                <p>The exchanged cryptocurrency will arrive in your crypto wallet within a few minutes.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <h2 class="mt-5 text-white text-center">Our App</h2>
-                    <div class="row mt-5 mb-5" data-aos="fade-left">
-                        <div class="col-md-8 mb-4">
-                            <div class=" text-center app">
-                                <p>Download the MoneyX mobile app to exchange <br> crypto on the go.</p>
-                                <ol>
-                                    <li>The best rates on the market</li>
-                                    <li>200+ cryptocurrencies available</li>
-                                    <li>Exchange crypto effortlessly. No registration needed</li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <ol>
-                              <img height="50" width="100" src="../static/assets3/img/gp.svg" alt="">
-                              <img height="50" width="100" src="../static/assets3/img/apple.svg" alt="">
-                              <img height="50" width="100" src="../static/assets3/img/apk.svg" alt="">
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <div class="row" >
-                <div class="col-md-3">
-                    <div class="socials">
-                        <ul>
-                            <li><a href=""><i class="fa fa-linkedin" ></i></a></li>
-                            <li><a href=""><i class="fa fa-twitter" ></i></a></li>
-                            <li><a href=""><i class="fa fa-instagram" ></i></a></li>
-                            <li><a href=""><i class="fa fa-facebook-square" ></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 text-center">
-                    <p>&copy; All right reserved MoneyX 2022</p>
-                </div>
-            </div>
-        </div>
-    </main>
+{% block contents %}
 
-</body>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" "></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" ></script>
-<script src="{% static 'assets3/aos/aos.js' %}"></script>
-<script src="{% static 'assets3/apexchart.js' %}"></script>
-<script src="{% static 'assets3/dashboard.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="{% static 'assets3/main.js' %}" ></script>
+<main>
+  <div class="row ">
+      <div class="col-md-4">
+          <div class="sidenav" >
+              <li class="side-link" >Exchange</li>
+              <li class="side-link" >Buy</li>
+              <li class="side-link" >Sell</li>
+          </div>
+         <div class="up-btn">
+          <button class="btn btn-outline-primary rounded-pill" >Scroll Top <i class="fa fa-long-arrow-up ml-1" ></i></button>
+          <br> <br>
+          <span class="text-white mr-2" >The best crypto <br> exchnage platfom</span>
+          <br> <br>
+          <i class="fa fa-star-o text-primary" ></i>
+          <i class="fa fa-star-o text-primary" ></i>
+          <i class="fa fa-star-o text-primary" ></i>
+          <i class="fa fa-star-o text-primary" ></i>
+          <i class="fa fa-star-o text-primary" ></i>
+          <i class="fa fa-star-o text-primary" ></i>
+          <span class="text-white ml-1" >5.0</span>
+         </div>
+      </div>
+      <div class="col-md-6  ">
+          <div class="contents">
+              <div class="row exch" data-aos="fade-up">
+                  <div class="col-md-6">
+                      <div class="exchange" >
+                          <br>
+                          <span>Fixed Rate</span>
+                          <form action="">
+                              <div class="input">
+                                  <span>You send</span>
+                                  <div style="display:inline-flex;">
+                                      <input type="number" placeholder="You send" class="form-control">
+                                      <select style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
+                                          <option value="ETH">ETH</option>
+                                          <option value="BTC">BTC</option>
+                                          <option value="ETH">USDT</option>
+                                          <option value="ETH">USDC</option>
+                                      </select>
+                                  </div>
+                              </div>
+                             <small class="mt-3" >1 BTC ~ 13.49010526 ETH - All fees <a href="">included</a></small>
+                              <div class="input">
+                                  <span id="recieve" >You get</span>
+                                  <div style="display:inline-flex;">
+                                      <input type="number" placeholder="You get" class="form-control mt-3">
+                                      <select style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
+                                          <option value="ETH">BTC</option>
+                                          <option value="BTC">ETH</option>
+                                          <option value="ETH">USDT</option>
+                                          <option value="ETH">USDC</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <button class="exchange-btn btn btn-primary btn-lg rounded-pill mb-3" >Exchange now</button>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="headline">
+                          <h2>Exchange any <br> crypto <br> instantly.</h2>
+                          <span>Exchange Bitcoin and 200+ altcoins in a fast, simple and secure way.</span>
+                          <div class="app-stores" style="display: inline-flex;">
+                              <img height="50" width="100" src="../static/assets/img/gp.svg" alt="">
+                              <img height="50" width="100" src="../static/assets/img/apple.svg" alt="">
+                              <img height="50" width="100" src="../static/assets/img/apk.svg" alt="">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              <h2 class="mt-5 text-white">Popular exchange pairs</h2>
+              <div class="row mt-5" data-aos="fade-left">
+                 
+                  <div class="col-md-6">
+                      <div class="pair">
+                          <h1>ETH <i class="fa fa-long-arrow-right"></i> BTC</h1>
+                          <div class="mt-3 mb-3" style="height: 90px;" >
+                              <canvas width="400" height="100" id="myChart"></canvas>
+                          </div>
+                          <div class="percent ml-3 mt-2">
+                              <span class="text-success" >0.38%</span> <small class="text-white">last month</small>
+                          </div>
+                      </div>
+                    
+                  </div>
+                  <div class="col-md-6">
+                      <div class="pair">
+                          <h1>BTC <i class="fa fa-long-arrow-right"></i> ETH</h1>
+                          <div class="mt-3 mb-3" style="height: 90px;" >
+                              <canvas width="400" height="100" id="myChart2"></canvas>
+                          </div>
+                          <div class="percent ml-3 mt-2">
+                              <span class="text-danger" > -0.38%</span> <small class="text-white">last month</small>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="pair">
+                          <h1>BTC <i class="fa fa-long-arrow-right"></i> XMR</h1>
+                          <div class="mt-3 mb-3" style="height: 90px;" >
+                              <canvas width="400" height="100" id="myChart3"></canvas>
+                          </div>
+                          <div class="percent ml-3 mt-2">
+                              <span class="text-danger" >-0.38%</span> <small class="text-white">last month</small>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="pair">
+                          <h1>DODGE <i class="fa fa-long-arrow-right"></i> BTC</h1>
+                          <div class="mt-3 mb-3" style="height: 90px;" >
+                              <canvas width="400" height="100" id="myChart4"></canvas>
+                          </div>
+                          <div class="percent ml-3 mt-2">
+                              <span class="text-success" >0.38%</span> <small class="text-white">last month</small>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <center><span class="more" ><a href="">Show more</a></span></center>
+              <hr>
+              <h2 class="mt-5 text-white">Why MoneyX</h2>
+              <div class="row mt-5 mb-5" data-aos="fade-right">
+                  <div class="col-md-6 mt-4">
+                      <div class="why">
+                          <div class="img">
+                              <img src="../static/assets/img/clock.png" alt="">
+                          </div>
+                          <div class="texts">
+                              <h4>24/7</h4>
+                              <h4>Live support</h4>
+                          </div>
+                          <p>Our dedicated support team is always ready to assist you with any questions regarding crypto exchanges.</p>
+                      </div>
+                  </div>
+                  <div class="col-md-6 mt-4">
+                      <div class="why">
+                          <div class="img">
+                              <img src="../static/assets/img/stars.png" alt="">
+                          </div>
+                          <div class="texts">
+                              <h4>Competitive Rate</h4>
+                              <h4>on the market</h4>
+                          </div>
+                          <p>We work with a variety of crypto trading platforms in order to find the best offer on the market for you.</p>
+                      </div>
+                  </div>
+                  <div class="col-md-6 mt-4">
+                      <div class="why">
+                          <div class="img">
+                              <img src="../static/assets/img/arrows.png" alt="">
+                          </div>
+                          <div class="texts">
+                              <h4>Speedy</h4>
+                              <h4>Transactions</h4>
+                          </div>
+                          <p>We achieved an average transaction speed of 25-40 minutes to ensure you get the best out of the crypto market.</p>
+                      </div>
+                  </div>
+                   <div class="col-md-6 mt-4">
+                      <div class="why">
+                          <div class="img">
+                              <img src="../static/assets/img/cards.png" alt="">
+                          </div>
+                          <div class="texts">
+                              <h4>Security</h4>
+                              <h4>of your funds</h4>
+                          </div>
+                          <p>We do not store cryptocurrencies. Coins are sent directly to your wallet after the exchange.</p>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              <h2 class="mt-5 text-white">How to exchange cryptocurrency</h2>
+              <div class="row mt-5 mb-5" data-aos="fade-up">
+                  <div class="col-md-6 mb-4">
+                      <div class="how">
+                          <div class="number">
+                              <img src="../static/assets/img/one.svg" alt="">
+                          </div>
+                          <div class="texts">
+                              <h4>Choose the crypto</h4>
+                              <h4>you’d like to exchange</h4>
+                          </div>
+                          <p>Select the cryptocurrency pair you’d like to exchange. When using MoneyX, you can exchange digital assets at either fixed or floating rates.</p>
+                      </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                      <div class="how">
+                          <div class="number">
+                              <img src="../static/assets/img/two.svg" alt="">
+                          </div>
+                          <div class="texts">
+                              <h4>Enter your crypto</h4>
+                              <h4>wallet address</h4>
+                          </div>
+                          <p>Enter the address of the crypto wallet that your new cryptocurrency will be sent to.</p>
+                      </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                      <div class="how">
+                          <div class="number">
+                              <img src="../static/assets/img/three.svg" alt="">
+                          </div>
+                          <div class="texts">
+                              <h4>Create an account in</h4>
+                              <h4>just a few clicks</h4>
+                          </div>
+                          <p>Sign up/Log in to your MoneyX account to track the transaction details. Register with either your Facebook/Twitter/Google account or your email address.</p>
+                      </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                      <div class="how">
+                          <div class="number">
+                              <img src="../static/assets/img/four.svg" alt="">
+                          </div>
+                          <div class="texts">
+                              <h4>Receive your crypto</h4>
+                              <!-- <h4>you’d like to exchange</h4> -->
+                          </div>
+                          <p>The exchanged cryptocurrency will arrive in your crypto wallet within a few minutes.</p>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              <h2 class="mt-5 text-white text-center">Our App</h2>
+              <div class="row mt-5 mb-5" data-aos="fade-left">
+                  <div class="col-md-8 mb-4">
+                      <div class=" text-center app">
+                          <p>Download the MoneyX mobile app to exchange <br> crypto on the go.</p>
+                          <ol>
+                              <li>The best rates on the market</li>
+                              <li>200+ cryptocurrencies available</li>
+                              <li>Exchange crypto effortlessly. No registration needed</li>
+                          </ol>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <ol>
+                        <img height="50" width="100" src="../static/assets/img/gp.svg" alt="">
+                        <img height="50" width="100" src="../static/assets/img/apple.svg" alt="">
+                        <img height="50" width="100" src="../static/assets/img/apk.svg" alt="">
+                      </ol>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+ 
+{% endblock contents %}
 
-<script>
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-  ];
-
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'ETH BTC Exchange',
-      backgroundColor: 'rgb(92, 184, 92)',
-      borderColor: 'rgb(92, 184, 92)',
-      data: [0, 10, 5, 2, 20, 30, 45],
-    }]
-  };
-
-  const config = {
-    type: 'line',
-    data: data,
-    options: {}
-  };
-
-  const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-</script>
-
-<script>
-    const labels2 = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-    ];
-  
-    const data2 = {
-      labels: labels,
-      datasets: [{
-        label: 'BTC ETH Exchange',
-        backgroundColor: 'rgb(217, 83, 79)',
-        borderColor: 'rgb(217, 83, 79)',
-        data: [50, 48, 45, 30, 20, 10, 5],
-      }]
-    };
-  
-    const config2 = {
-      type: 'line',
-      data: data2,
-      options: {}
-    };
-  
-    const myChart2 = new Chart(
-      document.getElementById('myChart2'),
-      config2
-    );
-</script>
-
-<script>
-    const labels3 = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-    ];
-  
-    const data3 = {
-      labels: labels,
-      datasets: [{
-        label: 'ETH BTC Exchange',
-        backgroundColor: 'rgb(92, 184, 92)',
-        borderColor: 'rgb(92, 184, 92)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-      }]
-    };
-  
-    const config3 = {
-      type: 'line',
-      data: data3,
-      options: {}
-    };
-  
-    const myChart3 = new Chart(
-      document.getElementById('myChart4'),
-      config3
-    );
-  </script>
-  
-  
-  <script>
-      const labels4 = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-      ];
-    
-      const data4 = {
-        labels: labels,
-        datasets: [{
-          label: 'BTC ETH Exchange',
-          backgroundColor: 'rgb(217, 83, 79)',
-          borderColor: 'rgb(217, 83, 79)',
-          data: [50, 48, 45, 30, 20, 10, 5],
-        }]
-      };
-    
-      const config4 = {
-        type: 'line',
-        data: data4,
-        options: {}
-      };
-    
-      const myChart4 = new Chart(
-        document.getElementById('myChart3'),
-        config4
-      );
-    </script>
-  
-
-    
-</html>

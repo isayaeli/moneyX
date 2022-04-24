@@ -332,3 +332,17 @@ h2{
 .app ol li{
     color: white;
 }
+
+.login input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: white;
+}
+.login input:focus{
+    background-color: transparent;
+    color: white;
+}
+.login span{
+    color: white;
+}
