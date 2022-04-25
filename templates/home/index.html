@@ -7,8 +7,8 @@
   <div class="row ">
       <div class="col-md-4">
           <div class="sidenav" >
-              <li class="side-link" >Exchange</li>
-              <li class="side-link" >Buy</li>
+              <li class="side-link" ><a type="button" id="exchange" >Exchange</a></li>
+              <li class="side-link"  ><a type="button" id="buy">Buy</a></li>
               <li class="side-link" >Sell</li>
           </div>
          <div class="up-btn">
@@ -27,12 +27,12 @@
       </div>
       <div class="col-md-6  ">
           <div class="contents">
-              <div class="row exch" data-aos="fade-up">
+              <div class="row exch form-exchange " data-aos="fade-up">
                   <div class="col-md-6">
                       <div class="exchange" >
                           <br>
                           <span>Fixed Rate</span>
-                          <form action="">
+                          <form action="" >
                               <div class="input">
                                   <span>You send</span>
                                   <div style="display:inline-flex;">
@@ -60,7 +60,9 @@
                               </div>
                               <button class="exchange-btn btn btn-primary btn-lg rounded-pill mb-3" >Exchange now</button>
                           </form>
+
                       </div>
+
                   </div>
                   <div class="col-md-6">
                       <div class="headline">
@@ -74,6 +76,65 @@
                       </div>
                   </div>
               </div>
+
+              <div class="row exch form-buy" style="display: none;" data-aos="fade-up">
+                <div class="col-md-6">
+                    <div class="exchange" >
+                        <br>
+                        <span>Buy Now</span>
+                        <form action="">
+                            <div class="input">
+                                <span>You send</span>
+                                <div style="display:inline-flex;">
+                                    <input type="number" placeholder="You send" class="form-control">
+                                    <select style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
+                                        <option value="ETH">TZS</option>
+                                        <option value="BTC">KSH</option>
+                                        <option value="ETH">UGS</option>
+                                        <option value="ETH">USD</option>
+                                    </select>
+                                </div>
+                            </div>
+                           <!-- <small class="mt-3" >1 BTC ~ 13.49010526 ETH - All fees <a href="">included</a></small> -->
+                            <div class="input">
+                                <span id="recieve" >You get</span>
+                                <div style="display:inline-flex;">
+                                    <input type="number" placeholder="You get" class="form-control mt-3">
+                                    <select style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
+                                        <option value="ETH">BTC</option>
+                                        <option value="BTC">ETH</option>
+                                        <option value="ETH">USDT</option>
+                                        <option value="ETH">USDC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input">
+                              <div>
+                                  <select style="width: 90%; " class="form-control mt-3 ml-3" name="" id="">
+                                      <option value="ETH">Tanzania</option>
+                                      <option value="BTC">Kenya</option>
+                                      <option value="ETH">Uganda</option>
+                                      <option value="ETH">Rwanda</option>
+                                  </select>
+                              </div>
+                          </div>
+                            <button class="exchange-btn btn btn-primary btn-lg rounded-pill mb-3" >Buy now</button>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="headline">
+                        <h2>Buy now any <br> crypto <br> instantly.</h2>
+                        <span>Exchange Bitcoin and 200+ altcoins in a fast, simple and secure way.</span>
+                        <div class="app-stores" style="display: inline-flex;">
+                            <img height="50" width="100" src="../static/assets/img/gp.svg" alt="">
+                            <img height="50" width="100" src="../static/assets/img/apple.svg" alt="">
+                            <img height="50" width="100" src="../static/assets/img/apk.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
               <hr>
               <h2 class="mt-5 text-white">Popular exchange pairs</h2>
               <div class="row mt-5" data-aos="fade-left">
@@ -253,6 +314,19 @@
           </div>
       </div>
   </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  $(document).on('click', "#buy", function(){
+    $(".form-buy").show()
+    $(".form-exchange").hide()
+})
+
+$(document).on('click', "#exchange", function(){
+    $(".form-exchange").show()
+    $(".form-buy").hide()
+})
+
+</script>
  
 {% endblock contents %}
 

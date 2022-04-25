@@ -1,5 +1,6 @@
-$(document).on('click', function(){
-    $('#sidelink').css('font-weight','bold')
+$(document).on('click', "#buy", function(){
+    $(".form-buy").show().slideDown("slow")
+    $("#form-exchange").hide()
 })
 
 function aos_init() {
@@ -13,6 +14,8 @@ function aos_init() {
   window.addEventListener('load', () => {
     aos_init();
   });
+
+
 
 
 

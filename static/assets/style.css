@@ -192,7 +192,55 @@ li a{
 .exchange small{
     margin: 20px;
 }
+.buy{
+    height: auto;
+    width: auto;
+    background-color: white;
+    border-radius: 10px;
+    
+}
+@keyframes slideInFromRight {
+    0% {
+      transform: translateX(20%);
+    }
+    .0%{
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
+  @keyframes fadeUp {
+    0% {
+      transform: translateY(20%);
+    }
+    .0%{
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+.form-buy{
+    animation: ease-in-out 1.3s slideInFromRight;
+}
+.form-exchange{
+    animation: ease-in-out 1.3s fadeUp;
+}
+.buy span{
+    padding: 20px;
+}
+.buy label{
+    padding: 20px;
+}
+
+.buy form input{
+    width: 60%;
+    margin: 15px;
+}
  input:focus, input.form-control:focus {
     outline:none !important;
     outline-width: 0 !important;
@@ -343,6 +391,7 @@ h2{
     background-color: transparent;
     color: white;
 }
+
 .login span{
     color: white;
 }
