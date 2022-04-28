@@ -32,16 +32,17 @@
                       <div class="exchange" >
                           <br>
                           <span>Fixed Rate</span>
-                          <form action="" >
+                          <form action="{% url 'exchanging' %}" method="post" >
+                              {% csrf_token %}
                               <div class="input">
                                   <span>You send</span>
                                   <div style="display:inline-flex;">
-                                      <input type="number" placeholder="You send" class="form-control">
-                                      <select style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
-                                          <option value="ETH">ETH</option>
-                                          <option value="BTC">BTC</option>
-                                          <option value="ETH">USDT</option>
-                                          <option value="ETH">USDC</option>
+                                      <input type="number" name="amount_from" placeholder="You send" class="form-control">
+                                      <select name="from_" style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
+                                        <option value="BTC">BTC</option>
+                                        <option value="ETH">ETH</option>
+                                        <option value="USDT">USDT</option>
+                                        <option value="USDC">USDC</option>
                                       </select>
                                   </div>
                               </div>
@@ -49,16 +50,16 @@
                               <div class="input">
                                   <span id="recieve" >You get</span>
                                   <div style="display:inline-flex;">
-                                      <input type="number" placeholder="You get" class="form-control mt-3">
-                                      <select style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
-                                          <option value="ETH">BTC</option>
-                                          <option value="BTC">ETH</option>
-                                          <option value="ETH">USDT</option>
-                                          <option value="ETH">USDC</option>
+                                      <input type="number" name="amount_to" placeholder="You get" class="form-control mt-3">
+                                      <select name="to" style="width: 36%; " class="form-control mt-3 mr-3" name="" id="">
+                                          <option value="BTC">BTC</option>
+                                          <option value="ETH">ETH</option>
+                                          <option value="USDT">USDT</option>
+                                          <option value="USDC">USDC</option>
                                       </select>
                                   </div>
                               </div>
-                              <button class="exchange-btn btn btn-primary btn-lg rounded-pill mb-3" >Exchange now</button>
+                              <button type="submit"class="exchange-btn btn btn-primary btn-lg rounded-pill mb-3" >Exchange now</button>
                           </form>
 
                       </div>

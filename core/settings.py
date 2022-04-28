@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'home',
     'dashboard',
     'userauth',
-    'transactions'
+    'transactions',
+    'exchange'
 ]
 
 MIDDLEWARE = [

@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('dashboard.urls')),
     path('', include('userauth.urls')),
     path('', include('transactions.urls')),
+    path('', include('exchange.urls')),
 
     path('password-reset/',auth_views.PasswordResetView.as_view(
         template_name='userauth/password_reset.html'),name='password_reset'),
