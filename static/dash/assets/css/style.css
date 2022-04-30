@@ -26,3 +26,30 @@
     margin-top: 34px;
     margin-right: 20px;
   }
+  .wallet{
+    margin-left: -80px;
+  }
+
+  .wallet-img img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    margin-left: 80px;
+  }
+
+  .coin-header{
+    display: inline-flex;
+    margin-left: 25%;
+  }
+
+  .coin-header span{
+     margin-left: 10px;
+  }
+  .coin-balance span{
+    margin-left: 25%;
+    font-size: 20px;
+  }
+  .actions button{
+    margin-top: 10px;
+    width: 100%;
+  }
