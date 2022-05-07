@@ -4,6 +4,7 @@ import requests
 import json
 from datetime import datetime
 import datetime
+from django.conf import settings
 
 CONTENT_TYPE = 'Content-Type'
 OK_ACCESS_KEY = 'OK-ACCESS-KEY'
@@ -11,6 +12,14 @@ OK_ACCESS_SIGN = 'OK-ACCESS-SIGN'
 OK_ACCESS_TIMESTAMP = 'OK-ACCESS-TIMESTAMP'
 OK_ACCESS_PASSPHRASE = 'OK-ACCESS-PASSPHRASE'
 APPLICATION_JSON = 'application/json'
+
+#geting time stamp
+def get_time():
+    urltime= 'https://www.okcoin.com/api/general/v3/time'
+    response=requests.get(urltime)
+    time=response.json()
+    time=time['iso']
+    return time
 
 # signature
 def signature(timestamp, method, request_path, body, secret_key):
@@ -41,7 +50,8 @@ def parse_params_to_str(params):
     return url[0:-1]
 
 
-api_key = 'c1f727c6-55b6-4cbb-ba6c-2a54649cb476'
-secret_key = '52F8998D968C14D145B3BE8DA7A1E5BF'
-timestamp = f"{datetime.datetime.utcnow().isoformat()[:-3]}Z"
-pass_phrase = 'Isaya@mimi100%'
+api_key = settings.OK_API_KEY
+secret_key = settings.OK_SECRETE_KEY
+timestamp = get_time()
+# timestamp = f"{datetime.datetime.utcnow().isoformat()[:-3]}Z"
+pass_phrase = settings.PASS_PHRASE
