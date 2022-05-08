@@ -1,32 +1,53 @@
 from django.shortcuts import render
 import requests
+
+from .api_calls import call_deposit, get_spot_balance
 from .config import *
+from .models import AssetBalance
 # Create your views here.
 def index(request):
-    return render(request, 'dash/dash.html')
+    try:
+        
+        base_url = 'https://www.okcoin.com'
+        request_path = '/api/account/v3/asset-valuation'
+        params = {'valuation_currency': 'USD'}
+
+        # request path
+        request_path = request_path + parse_params_to_str(params)
+        url = base_url + request_path 
+        
+        #body params
+        body = json.dumps(params)
+
+        # request header and body
+        header = get_header(api_key, signature(timestamp, 'GET', request_path, body ,secret_key), timestamp, pass_phrase)
+
+        # do request
+        response = requests.get(url, data=body, headers=header)
+        print(response)
+        response = response.json()
+        balance =response['balance']
+        print(balance)
+        dbbalance = AssetBalance(balance=balance)
+        dbbalance.save()
+    except:
+        balance = AssetBalance.objects.all().last()
+        print(f"this is from db {balance}")
+    
+
+    context = {
+        'data':balance
+    }
+    return render(request, 'dash/dash.html', context)
 
 
 def deposits(request):
-    base_url = 'https://www.okcoin.com'
-    request_path = '/api/account/v3/withdrawal'
-
-    params = {"amount":"1","fee":"0.0005","destination":"3","currency":"BTC","to_address":"17DKe3kkkkiiiiTvAKKi2vMPbm1Bz3CMKw","chain":"USDT-ERC20"}
-
-    # request path
-    request_path = request_path + parse_params_to_str(params)
-    url = base_url + request_path 
-
-    body = json.dumps(params)
-
-    # request header and body
-    header = get_header(api_key, signature(timestamp, 'POST', request_path, body ,secret_key), timestamp, pass_phrase)
-
-    # do request
-    response = requests.post(url, data=body,  headers=header)
-    print(response)
-    print(response.text)
-    print(timestamp)
-    return render(request,'dash/deposits.html')
+    #call_deposit(api_key, secret_key, timestamp, pass_phrase, "USDT")
+    balance = get_spot_balance(api_key, secret_key, timestamp, pass_phrase, "USDT")
+    context = {
+        "balance":balance
+    }
+    return render(request,'dash/deposits.html', context)
 
 
 def withdraws(request):
