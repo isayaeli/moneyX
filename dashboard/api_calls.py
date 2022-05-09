@@ -39,7 +39,8 @@ def deposit_history(api_key, secret_key, timestamp, pass_phrase, currency):
     # do request
     response = requests.get(url,  headers=header)
     print(response.text)
-    return response.text
+    response = response.json()
+    return response
 
 
 

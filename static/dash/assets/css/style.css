@@ -34,7 +34,7 @@
     height: 50px;
     width: 50px;
     border-radius: 50px;
-    margin-left: 80px;
+    margin-left: 50px;
   }
 
   .coin-header{
@@ -54,6 +54,6 @@
   }
   .actions button{
     margin-top: 10px;
-    margin-left: 80px;
-    width: 30%;
+    margin-left: 50px;
+    width: 50%;
   }

@@ -42,11 +42,12 @@ def index(request):
 
 
 def deposits(request):
-    call_deposit(api_key, secret_key, timestamp, pass_phrase, "BTC")
-    deposit_history(api_key, secret_key, timestamp, pass_phrase, "USDT")
+    # call_deposit(api_key, secret_key, timestamp, pass_phrase, "BTC")
+    history =deposit_history(api_key, secret_key, timestamp, pass_phrase, "USDT")
     # balance = get_spot_balance(api_key, secret_key, timestamp, pass_phrase, "BTC")
     context = {
-        "balance":10.798889
+        "balance":10.798889,
+        "history":history
     }
     return render(request,'dash/deposits.html', context)
 
