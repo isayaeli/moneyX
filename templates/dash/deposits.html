@@ -18,8 +18,62 @@
                     <div class="card-header">
                         <h4>Walets</h4>
                     </div>
-                    <div class="card-body">
-                        <div class="row wallet " >
+                    <div class="card-body" style="max-height: 550px; overflow-y: scroll;">
+                        <div class="row wallet mb-5" >
+                            <div class="col-md-2">
+                               <div class="wallet-img">
+                                    <img  src="{% static 'assets/img/usdt.png' %}" alt="">
+                               </div>
+                            </div>
+                            <div class="col-md-10 walet-info">
+                                <div class="coin-header">
+                                    <h5>Tether </h5> <span>USDT</span>
+                                </div>
+                                <div class="coin-balance">
+                                    <span>{{balance}}</span>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn btn-primary rounded-pill" >Deposit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row wallet mb-5 " >
+                            <div class="col-md-2">
+                               <div class="wallet-img">
+                                    <img  src="{% static 'assets/img/btc.png' %}" alt="">
+                               </div>
+                            </div>
+                            <div class="col-md-10 walet-info">
+                                <div class="coin-header">
+                                    <h5>Tether </h5> <span>USDT</span>
+                                </div>
+                                <div class="coin-balance">
+                                    <span>{{balance}}</span>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn btn-primary rounded-pill" >Deposit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row wallet mb-5 " >
+                            <div class="col-md-2">
+                               <div class="wallet-img">
+                                    <img  src="{% static 'assets/img/dodge.png' %}" alt="">
+                               </div>
+                            </div>
+                            <div class="col-md-10 walet-info">
+                                <div class="coin-header">
+                                    <h5>Tether </h5> <span>USDT</span>
+                                </div>
+                                <div class="coin-balance">
+                                    <span>{{balance}}</span>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn btn-primary rounded-pill" >Deposit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row wallet mb-5" >
                             <div class="col-md-2">
                                <div class="wallet-img">
                                     <img  src="{% static 'assets/img/usdt.png' %}" alt="">
@@ -49,7 +103,24 @@
                                 <h4>Deposit History</h4>
                             </div>
                             <div class="card-body">
-                            
+                                <table class="table" >
+                                    <thead>
+                                        <th>#</th>
+                                        <th>Amount</th>
+                                        <th>To</th>
+                                        <th>Chain</th>
+                                        <th>Currency</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

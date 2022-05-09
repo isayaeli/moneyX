@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import requests
 
-from .api_calls import call_deposit, get_spot_balance
+from .api_calls import call_deposit, deposit_history, get_spot_balance
 from .config import *
 from .models import AssetBalance
 # Create your views here.
@@ -42,10 +42,11 @@ def index(request):
 
 
 def deposits(request):
-    #call_deposit(api_key, secret_key, timestamp, pass_phrase, "USDT")
-    balance = get_spot_balance(api_key, secret_key, timestamp, pass_phrase, "USDT")
+    call_deposit(api_key, secret_key, timestamp, pass_phrase, "BTC")
+    deposit_history(api_key, secret_key, timestamp, pass_phrase, "USDT")
+    # balance = get_spot_balance(api_key, secret_key, timestamp, pass_phrase, "BTC")
     context = {
-        "balance":balance
+        "balance":10.798889
     }
     return render(request,'dash/deposits.html', context)
 
