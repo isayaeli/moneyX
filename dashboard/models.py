@@ -1,4 +1,5 @@
 from datetime import datetime
+from itertools import chain
 from tabnanny import verbose
 from django.db import models
 
@@ -12,3 +13,13 @@ class AssetBalance(models.Model):
 
     class Meta:
         verbose_name_plural = 'Asset balance'
+
+class DepositHistory(models.Model):
+    history = models.JSONField(null=True)
+    saved_on = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return str(self.saved_on)
+
+    class Meta:
+        verbose_name_plural = 'Deposit History'

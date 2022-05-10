@@ -1,0 +1,44 @@
+Hello addrss here{% extends 'dash/config.html' %}
+{% load static %}
+{% block contents %}
+<div id="main">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+
+    <div class="page-heading">
+        <h3>Welcome to your Dashboard</h3>
+    </div>
+    <div class="page-content">
+        <section class="row">
+            <div class="col-12 col-lg-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Withdraw</h4>
+                    </div>
+                    <div class="card-body" style="max-height: 550px; overflow-y: scroll;">
+                        <div class="row" >
+                            <form action="{% url 'finish' %}" method="post">
+                                {% csrf_token %}
+                                <label for="currency" class=" mb-3" >Currency</label>
+                                <input readonly type="text" value="{{currency}}"  name="currency" class="form-control mb-3">
+                                <label for="address" class=" mb-3" >Address</label>
+                                <input type="text" name="address" class="form-control mb-3">
+
+                                <label for="amount" class=" mb-3" >Amount</label>
+                                <input type="text" name="amount" class="form-control mb-3">
+                                <center> <button style="width:50%;" class="btn btn-primary rounded-pill btn-lg" >Finish Withdrawal</button></center>
+                            </form>
+                        </div>
+             
+                        <!-- withd = call_withdraw(api_key, secret_key,timestamp,pass_phrase, amount,currency,address) -->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    {% endblock contents %}

@@ -13,13 +13,13 @@
     </div>
     <div class="page-content">
         <section class="row">
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-3">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Walets</h4>
+                        <h4>Wallets</h4>
                     </div>
-                    <div class="card-body">
-                        <div class="row wallet " >
+                    <div class="card-body" style="max-height: 550px; overflow-y: scroll;">
+                        <div class="row wallet mb-5" >
                             <div class="col-md-2">
                                <div class="wallet-img">
                                     <img  src="{% static 'assets/img/usdt.png' %}" alt="">
@@ -30,10 +30,80 @@
                                     <h5>Tether </h5> <span>USDT</span>
                                 </div>
                                 <div class="coin-balance">
-                                    <span>0.00000</span>
+                                    <span>{{balance}}</span>
                                 </div>
                                 <div class="actions">
-                                    <button class="btn btn-primary rounded-pill" >Withdraw</button>
+                                    <form action="{% url 'withdraw_address' %}" method="post" >
+                                        {% csrf_token %}
+                                        <input type="hidden" name="currency" value="USDT">
+                                        <button type="submit" class="btn btn-primary rounded-pill" >Withdraw</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row wallet mb-5 " >
+                            <div class="col-md-2">
+                               <div class="wallet-img">
+                                    <img  src="{% static 'assets/img/btc.png' %}" alt="">
+                               </div>
+                            </div>
+                            <div class="col-md-10 walet-info">
+                                <div class="coin-header">
+                                    <h5>Bitcoin </h5> <span>BTC</span>
+                                </div>
+                                <div class="coin-balance">
+                                    <span>0.0000</span>
+                                </div>
+                                <div class="actions">
+                                    <form action="{% url 'withdraw_address' %}" method="post" >
+                                        {% csrf_token %}
+                                        <input type="hidden" name="currency" value="BTC">
+                                        <button type="submit" class="btn btn-primary rounded-pill" >Withdraw</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row wallet mb-5 " >
+                            <div class="col-md-2">
+                               <div class="wallet-img">
+                                    <img  src="{% static 'assets/img/ltc.png' %}" alt="">
+                               </div>
+                            </div>
+                            <div class="col-md-10 walet-info">
+                                <div class="coin-header">
+                                    <h5>LTC </h5> <span>LTC</span>
+                                </div>
+                                <div class="coin-balance">
+                                    <span>0.0000</span>
+                                </div>
+                                <div class="actions">
+                                    <form action="{% url 'withdraw_address' %}" method="post" >
+                                        {% csrf_token %}
+                                        <input type="hidden" name="currency" value="LTC">
+                                        <button type="submit" class="btn btn-primary rounded-pill" >Withdraw</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row wallet mb-5" >
+                            <div class="col-md-2">
+                               <div class="wallet-img">
+                                    <img  src="{% static 'assets/img/eth.png' %}" alt="">
+                               </div>
+                            </div>
+                            <div class="col-md-10 walet-info">
+                                <div class="coin-header">
+                                    <h5>Ethereum</h5> <span>ETH</span>
+                                </div>
+                                <div class="coin-balance">
+                                    <span>0.0000</span>
+                                </div>
+                                <div class="actions">
+                                    <form action="{% url 'withdraw_address' %}" method="post" >
+                                        {% csrf_token %}
+                                        <input type="hidden" name="currency" value="ETH">
+                                        <button type="submit" class="btn btn-primary rounded-pill" >Withdraw</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +119,32 @@
                                 <h4>Withdraw History</h4>
                             </div>
                             <div class="card-body">
-                            
+                                
+                                <table class="table" >
+                                    <thead>
+                                        <!-- <th>#</th> -->
+                                        <th>Amount</th>
+                                        <th>To</th>
+                                        <th>Chain</th>
+                                        <th>Currency</th>
+                                        <th>Date</th>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in history %}
+                                      
+                                       
+                                   
+                                    <tr>
+                                    <td>{{data.amount}}</td>
+                                    <td>{{data.to}}</td>
+                                    <td>{{data.chain}}</td>
+                                    <td>{{ data.currency }}</td>
+                                    <td>{{data.timestamp|truncatechars:"11"}}</td>
+                                    <tr>
+                                
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

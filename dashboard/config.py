@@ -1,5 +1,6 @@
 import hmac
 import base64 as Base64
+import time
 import requests
 import json
 from datetime import datetime
@@ -14,12 +15,12 @@ OK_ACCESS_PASSPHRASE = 'OK-ACCESS-PASSPHRASE'
 APPLICATION_JSON = 'application/json'
 
 #geting time stamp
-def get_time():
-    urltime= 'https://www.okcoin.com/api/general/v3/time'
-    response=requests.get(urltime)
-    time=response.json()
-    time=time['iso']
-    return time
+# def get_time():
+#     urltime= 'https://www.okcoin.com/api/general/v3/time'
+#     response=requests.get(urltime)
+#     time=response.json()
+#     time=time['iso']
+#     return time
 
 # signature
 def signature(timestamp, method, request_path, body, secret_key):
@@ -52,6 +53,10 @@ def parse_params_to_str(params):
 
 api_key = settings.OK_API_KEY
 secret_key = settings.OK_SECRETE_KEY
-timestamp = get_time()
+# timestamp = 2022-06-09T19:17:47.759Z
 # timestamp = f"{datetime.datetime.utcnow().isoformat()[:-3]}Z"
+# timestamp = get_time()
+now = datetime.datetime.now()
+timestamp = time.mktime(now.timetuple())
+print(timestamp)
 pass_phrase = settings.PASS_PHRASE
