@@ -130,23 +130,23 @@
                                         <th>Date</th>
                                     </thead>
                                     <tbody>
-                                        {% for data in history|slice:"1" %}
-                                        {% for key, value in data.items %}
-                                       
-                                    {% for data in value %}
-                                    <tr>
-                                   
-                                    <td>{{data.amount}}</td>
-                                    <td>{{data.to}}</td>
-                                    <td>{{data.chain}}</td>
-                                    <td>{{ data.currency }}</td>
-                                    <td>{{data.timestamp|truncatechars:"11"}}</td>
-                                    <tr>
-                                    {% endfor %}
-                                           
-                                         
+                                        {% for data in history|slice:"3" %}
+                                            {% for key, value in data.items %}
                                         
-                                        {% endfor %}
+                                                {% for data in value %}
+                                                <tr>
+                                            
+                                                <td>{{data.amount}}</td>
+                                                <td>{{data.to}}</td>
+                                                <td>{{data.chain}}</td>
+                                                <td>{{ data.currency }}</td>
+                                                <td>{{data.timestamp|truncatechars:"11"}}</td>
+                                                <tr>
+                                                {% endfor %}
+                                                    
+                                            
+                                            
+                                            {% endfor %}
                                         {% endfor %}
                                     </tbody>
                                 </table>
