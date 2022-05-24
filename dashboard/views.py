@@ -19,6 +19,8 @@ def index(request):
         
         #body params
         body = json.dumps(params)
+        now = datetime.datetime.now()
+        timestamp = time.mktime(now.timetuple())
 
         # request header and body
         header = get_header(api_key, signature(timestamp, 'GET', request_path, body ,secret_key), timestamp, pass_phrase)
@@ -43,8 +45,7 @@ def index(request):
 
 
 def deposits(request):
-    now = datetime.datetime.now()
-    timestamp = time.mktime(now.timetuple())
+   
     if request.method == 'POST':
         
         try:
@@ -54,7 +55,6 @@ def deposits(request):
             hist.save()
         except:
             history = DepositHistory.objects.values('history')
-            # print(all_.amount)
         context = {
             "balance":10.798889,
             "history":history
@@ -77,8 +77,7 @@ def deposits(request):
 
 def deposit_address(request):
     if request.method == 'POST':
-        now = datetime.datetime.now()
-        timestamp = time.mktime(now.timetuple())
+      
         print(timestamp)
         currency = request.POST['currency']
         deposit_address = call_deposit(api_key, secret_key, timestamp, pass_phrase, currency)
@@ -90,8 +89,6 @@ def deposit_address(request):
 
 
 def withdraws(request):
-    now = datetime.datetime.now()
-    timestamp = time.mktime(now.timetuple())
     history = withdraw_history(api_key, secret_key, timestamp, pass_phrase)
     balance = AssetBalance.objects.all().last()
     context = {
@@ -113,8 +110,6 @@ def withdraw_address(request):
 
 def finish_withdraw(request):
     if request.method == 'POST':
-        now = datetime.datetime.now()
-        timestamp = time.mktime(now.timetuple())
         print(request.POST)
         amount = request.POST.get('amount')
         currency = request.POST.get('currency')

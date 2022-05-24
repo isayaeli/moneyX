@@ -1,6 +1,8 @@
 import json
 import requests
 from .config import get_header, parse_params_to_str, signature
+import time
+import datetime
 def call_deposit(api_key, secret_key, timestamp, pass_phrase, currency):
     base_url = 'https://www.okcoin.com'
     request_path = '/api/account/v3/deposit/address'
@@ -12,6 +14,8 @@ def call_deposit(api_key, secret_key, timestamp, pass_phrase, currency):
     url = base_url + request_path 
 
     body = {}
+    now = datetime.datetime.now()
+    timestamp = time.mktime(now.timetuple())
 
     # request header and body
     header = get_header(api_key, signature(timestamp, 'GET', request_path, body ,secret_key), timestamp, pass_phrase)
@@ -34,6 +38,8 @@ def deposit_history(api_key, secret_key, timestamp, pass_phrase, currency):
     url = base_url + request_path 
 
     body = {}
+    now = datetime.datetime.now()
+    timestamp = time.mktime(now.timetuple())
 
     # request header and body
     header = get_header(api_key, signature(timestamp, 'GET', request_path, body ,secret_key), timestamp, pass_phrase)
@@ -57,7 +63,8 @@ def get_spot_balance(api_key, secret_key, timestamp, pass_phrase, currency):
     url = base_url + request_path 
 
     body = {}
-
+    now = datetime.datetime.now()
+    timestamp = time.mktime(now.timetuple())
     # request header and body
     header = get_header(api_key, signature(timestamp, 'GET', request_path, body ,secret_key), timestamp, pass_phrase)
 
@@ -81,6 +88,8 @@ def call_withdraw(api_key, secret_key, timestamp, pass_phrase, amount, currency,
     request_path = request_path 
     url = base_url + request_path
     body = json.dumps(params)
+    now = datetime.datetime.now()
+    timestamp = time.mktime(now.timetuple())
     # request header and body
     header = get_header(api_key, signature(timestamp, 'POST', request_path,body,secret_key), timestamp, pass_phrase)
 
@@ -98,6 +107,8 @@ def withdraw_history(api_key, secret_key, timestamp, pass_phrase):
     # request_path = request_path + parse_params_to_str(params)
     url = base_url + request_path
     body = {}
+    now = datetime.datetime.now()
+    timestamp = time.mktime(now.timetuple())
 
     # request header and body
     header = get_header(api_key, signature(timestamp, 'GET', request_path,body, secret_key), timestamp, pass_phrase)
