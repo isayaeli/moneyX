@@ -30,7 +30,11 @@
            <div class="right-nav-items">
                <li><a href="">About Us</a></li>
                <li><a href="">Contact Us</a></li>
+               {% if user.is_authenticated %}
+               <li><a class=" auth-btn btn btn-outline-primary rounded-pill" href="{% url 'dash' %}">Dashboard</a></li>
+               {% else %}
                <li><a class=" auth-btn btn btn-outline-primary rounded-pill" href="{% url 'login' %}">Get Started</a></li>
+               {% endif %}
            </div>
         </nav>
         <div class="bottom-line">.</div>

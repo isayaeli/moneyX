@@ -29,10 +29,12 @@ def index(request):
         response = requests.get(url, data=body, headers=header)
         print(response)
         response = response.json()
-        balance =response['balance']
-        print(balance)
-        dbbalance = AssetBalance(balance=balance)
-        dbbalance.save()
+        api_balance =response['balance']
+        print(api_balance)
+        dbbalance = AssetBalance(balance=api_balance)
+        balance = AssetBalance.objects.all().last()
+        if api_balance == balance or balance ==  None:
+            dbbalance.save()
     except:
         balance = AssetBalance.objects.all().last()
         print(f"this is from db {balance}")
@@ -62,8 +64,7 @@ def deposits(request):
 
 
     history = DepositHistory.objects.values('history')
-    # print(all_)
-    # balance = get_spot_balance(api_key, secret_key, timestamp, pass_phrase, "BTC")
+
     balance = AssetBalance.objects.all().last()
     context = {
         "balance":balance,
