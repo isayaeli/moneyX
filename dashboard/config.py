@@ -1,11 +1,10 @@
 import hmac
 import base64 as Base64
 import time
-import requests
-import json
 from datetime import datetime
 import datetime
 from django.conf import settings
+from django.utils.timezone import get_current_timezone
 
 CONTENT_TYPE = 'Content-Type'
 OK_ACCESS_KEY = 'OK-ACCESS-KEY'

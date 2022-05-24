@@ -1,4 +1,4 @@
-from ftplib import error_perm
+import json
 from django.shortcuts import redirect, render
 import requests
 
@@ -43,7 +43,10 @@ def index(request):
 
 
 def deposits(request):
+    now = datetime.datetime.now()
+    timestamp = time.mktime(now.timetuple())
     if request.method == 'POST':
+        
         try:
             currency = request.POST['currency']
             history =deposit_history(api_key, secret_key, timestamp, pass_phrase, currency)
@@ -74,6 +77,9 @@ def deposits(request):
 
 def deposit_address(request):
     if request.method == 'POST':
+        now = datetime.datetime.now()
+        timestamp = time.mktime(now.timetuple())
+        print(timestamp)
         currency = request.POST['currency']
         deposit_address = call_deposit(api_key, secret_key, timestamp, pass_phrase, currency)
     context = {
@@ -84,6 +90,8 @@ def deposit_address(request):
 
 
 def withdraws(request):
+    now = datetime.datetime.now()
+    timestamp = time.mktime(now.timetuple())
     history = withdraw_history(api_key, secret_key, timestamp, pass_phrase)
     balance = AssetBalance.objects.all().last()
     context = {
@@ -105,6 +113,8 @@ def withdraw_address(request):
 
 def finish_withdraw(request):
     if request.method == 'POST':
+        now = datetime.datetime.now()
+        timestamp = time.mktime(now.timetuple())
         print(request.POST)
         amount = request.POST.get('amount')
         currency = request.POST.get('currency')
