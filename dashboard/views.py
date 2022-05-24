@@ -45,50 +45,31 @@ def index(request):
 
 
 def deposits(request):
-   
-    if request.method == 'POST':
+
+    saved_history = DepositHistory.objects.values('history')
+    history =deposit_history(api_key, secret_key, timestamp, pass_phrase)
+    save_hist = DepositHistory(history=history)
+
+
+    saved_history = saved_history[0]['history']
+    for data in history:
+        for dataz in saved_history:
+            saved = dataz['timestamp']
+        from_api = data['timestamp']
         
-        try:
-            history =deposit_history(api_key, secret_key, timestamp, pass_phrase)
-            hist = DepositHistory(history=history)
-            saved_history = DepositHistory.objects.values('history')
-            print(f"{saved_history} saved history here")
-            print(history)
-            if saved_history != history:
-                hist.save()
-        except:
-            history = DepositHistory.objects.values('history')
-        context = {
-            "balance":10.798889,
-            "history":history
-        }
-        return render(request,'dash/deposits.html', context)
-    else:
-        saved_history = DepositHistory.objects.values('history')
-        history =deposit_history(api_key, secret_key, timestamp, pass_phrase)
-        hist = DepositHistory(history=history)
-        # print(saved_history[0]['history'])
-        # print(history)
-        saved_history = saved_history[0]['history']
-        for data in history:
-            for dataz in saved_history:
-                print(f"{dataz['timestamp']} this is from db")
-                sh = dataz['timestamp']
-            print(data['timestamp'])
-            h = data['timestamp']
-        if sh != h or sh == None:
-            hist.save()
- 
-    
-        history = DepositHistory.objects.values('history')
-        # print(all_)
-        # balance = get_spot_balance(api_key, secret_key, timestamp, pass_phrase, "BTC")
-        balance = AssetBalance.objects.all().last()
-        context = {
-            "balance":balance,
-            "history":history
-        }
-        return render(request,'dash/deposits.html', context)
+    if saved != from_api or saved == None:
+        save_hist.save()
+
+
+    history = DepositHistory.objects.values('history')
+    # print(all_)
+    # balance = get_spot_balance(api_key, secret_key, timestamp, pass_phrase, "BTC")
+    balance = AssetBalance.objects.all().last()
+    context = {
+        "balance":balance,
+        "history":history
+    }
+    return render(request,'dash/deposits.html', context)
 
 
 def deposit_address(request):
