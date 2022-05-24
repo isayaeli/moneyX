@@ -53,8 +53,8 @@ def deposits(request):
 
     saved_history = saved_history[0]['history']
     for data in history:
-        for dataz in saved_history:
-            saved = dataz['timestamp']
+        for save_data in saved_history:
+            saved = save_data['timestamp']
         from_api = data['timestamp']
         
     if saved != from_api or saved == None:
