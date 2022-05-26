@@ -30,7 +30,12 @@
                                     <h5>Tether </h5> <span>USDT</span>
                                 </div>
                                 <div class="coin-balance">
-                                    <span>{{balance}}</span>
+                                    {% for data in bal %}
+                                        {% if data.currency == 'USDT' %}
+                                        <span>{{data.balance}}</span>
+                                        
+                                        {% endif %}
+                                   {% endfor %}
                                 </div>
                                 <div class="actions">
                                     <form action="{% url 'address' %}" method="post" >
@@ -52,7 +57,14 @@
                                     <h5>Bitcoin </h5> <span>BTC</span>
                                 </div>
                                 <div class="coin-balance">
-                                    <span>0.0000</span>
+                                    {% for data in bal %}
+                                    {% if data.currency == 'BTC' %}
+                                    <span>{{data.balance}}</span>
+                                    {% endif %}
+                                    {% if data.currency == None %}
+                                    <span>0.00</span>
+                                    {% endif %}
+                                   {% endfor %}
                                 </div>
                                 <div class="actions">
                                     <form action="{% url 'address' %}" method="post" >
@@ -74,7 +86,14 @@
                                     <h5>LTC </h5> <span>LTC</span>
                                 </div>
                                 <div class="coin-balance">
-                                    <span>0.0000</span>
+                                    {% for data in bal %}
+                                    {% if data.currency == 'LTC' %}
+                                    <span>{{data.balance}}</span>
+                                    {% endif %}
+                                    {% if data.currency == None %}
+                                    <span>0.00</span>
+                                    {% endif %}
+                                   {% endfor %}
                                 </div>
                                 <div class="actions">
                                     <form action="{% url 'address' %}" method="post" >
@@ -96,7 +115,14 @@
                                     <h5>Ethereum</h5> <span>ETH</span>
                                 </div>
                                 <div class="coin-balance">
-                                    <span>0.0000</span>
+                                    {% for data in bal %}
+                                    {% if data.currency == 'LTC' %}
+                                    <span>{{data.balance}}</span>
+                                    {% endif %}
+                                    {% if data.currency == None %}
+                                    <span>0.00</span>
+                                    {% endif %}
+                                   {% endfor %}
                                 </div>
                                 <div class="actions">
                                     <form action="{% url 'address' %}" method="post" >
@@ -115,11 +141,31 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                            {% if messages %}
+                            {% for message in messages %}
+                              {% if message.tags == 'success' %}
+                                <div class="alert alert-success text-center mb-3 " role="alert">
+                                {{message}}
+                                </div>
+                              {% endif %}
+                              {% if message.tags == 'info' %}
+                              <div class="alert alert-info text-center mb-3 " role="alert">
+                              {{message}}
+                              </div>
+                            {% endif %}
+                              {% if message.tags == 'error' %}
+                                <div class="alert alert-danger text-center mb-3 " role="alert">
+                                {{message}}
+                                </div>
+                              {% endif %}
+                            {% endfor %}
+                          {% endif %}
                             <div class="card-header">
                                 <h4>Deposit History</h4>
+                               
                             </div>
                             <div class="card-body">
-                         
+                       
                                 <table class="table" >
                                     <thead>
                                         <!-- <th>#</th> -->

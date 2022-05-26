@@ -26,6 +26,7 @@ Hello addrss here{% extends 'dash/config.html' %}
                                    <th>Address</th>
                                    <th>Currency</th>
                                    <th>Chain</th>
+                                   <th>Action</th>
                                </thead>
                                <tbody>
                                    {% for data in address %}
@@ -34,6 +35,9 @@ Hello addrss here{% extends 'dash/config.html' %}
                                        <td>{{ data.address }}</td>
                                        <td>{{ data.currency }}</td>
                                        <td>{{ data.chain }}</td>
+                                       <td>
+                                           <button data-toggle="modal" data-target="#conf{{forloop.counter}}" class="btn btn-primary btn-sm rounded-pill" >Deposit</button>
+                                        </td>
                                    </tr>
                                    {% endfor %}
                                </tbody>
@@ -47,5 +51,40 @@ Hello addrss here{% extends 'dash/config.html' %}
 
         </section>
     </div>
+
+
+    {% for data in address %}
+    <!-- Modal -->
+    <div class="modal fade" id="conf{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+            <h5 class="modal-title" id="exampleModalLabel">Confirm Deposit Address {{data.id}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                You are about to Deposit <b>{{data.currency}}</b> to a <b>{{data.chain}}</b>
+                <p class="mt-3" >Address: <b>{{ data.address }}</b></p>
+                <p class="text-danger" ><b>Note:Make sure you Deposit First using above address, After deposting Make sure you click confirm so that we can track you deposit</b></p>
+                <form action="{% url 'track_deposit' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{data.currency}}" name="currency" >
+                    <input type="hidden" value="{{data.address}}" name="address" >
+                    <input type="hidden" value="{{data.chain}}" name="chain" >
+                    <input type="number" name="balance" class="form-control" placeholder="Enter Amout You Deposited" required >
+                    <button class="btn btn-primary rounded-pill mt-3" >Confirm</button>
+                </form>
+            </div>
+            <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+        </div>
+    </div>
+    {% endfor %}
 
     {% endblock contents %}

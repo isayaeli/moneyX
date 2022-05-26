@@ -1,10 +1,13 @@
 import json
+from locale import currency
+
+from django.contrib import messages
 from django.shortcuts import redirect, render
 import requests
 
 from .api_calls import call_deposit, call_withdraw, deposit_history, get_spot_balance, withdraw_history
 from .config import *
-from .models import AssetBalance, DepositHistory
+from .models import AssetBalance, Deposit, DepositHistory
 # Create your views here.
 def index(request):
     try:
@@ -67,21 +70,26 @@ def deposits(request):
     if saved != from_api or saved == None:
         save_hist.save()
 
-
+    
     history = DepositHistory.objects.values('history')
 
+    balance_ = Deposit.objects.filter(user=request.user,verify=True)
+
+    sum_of_user_balance =  sum(balance_.values_list('balance', flat=True))
+    print(sum_of_user_balance)
+  
     balance = AssetBalance.objects.all().last()
     context = {
         "balance":balance,
-        "history":history
+        "history":history,
+        'dp':sum_of_user_balance,
+        'bal':balance_
     }
     return render(request,'dash/deposits.html', context)
 
 
 def deposit_address(request):
     if request.method == 'POST':
-      
-        print(timestamp)
         currency = request.POST['currency']
         deposit_address = call_deposit(api_key, secret_key, timestamp, pass_phrase, currency)
     context = {
@@ -122,3 +130,28 @@ def finish_withdraw(request):
         'data':withd['error_message']
     }
     return render(request, 'dash/finish_withdraw.html',context)
+
+
+
+
+def track_deposit(request):
+    deposit =  Deposit()
+    if request.method == 'POST':
+        currency = request.POST['currency']
+        if Deposit.objects.filter(currency=currency).exists():
+            filt = Deposit.objects.filter(currency=currency).last()
+            new_balalance = int(request.POST['balance']) + filt.balance
+            print(new_balalance)
+            dp = Deposit.objects.get(id=filt.id)
+            dp.balance = new_balalance
+            dp.save()
+            messages.info(request, "Your  Deposit Information has been Updated please wait for confirmation to update your balance")
+        else:
+            deposit.user = request.user
+            deposit.balance =request.POST['balance']
+            deposit.address = request.POST['address']
+            deposit.chain = request.POST['chain']
+            deposit.currency = request.POST['currency']
+            deposit.save()
+            messages.success(request, "Your New Deposit Information has been submited please wait for confirmation to update your balance")
+    return redirect('deposits')

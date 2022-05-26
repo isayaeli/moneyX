@@ -7,5 +7,6 @@ urlpatterns =[
     path('withdraw', views.withdraws, name='withdraw'),
     path('address', views.deposit_address, name='address'),
     path('withdraw_address', views.withdraw_address, name='withdraw_address'),
-    path('finish', views.finish_withdraw, name='finish')
+    path('finish', views.finish_withdraw, name='finish'),
+    path('track-deposit', views.track_deposit, name='track_deposit')
 ]
