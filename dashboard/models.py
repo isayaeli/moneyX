@@ -28,3 +28,18 @@ class DepositHistory(models.Model):
 
     class Meta:
         verbose_name_plural = 'Deposit History'
+
+
+
+class Deposit(models.Model):
+    user  = models.ForeignKey(User, related_name='userdeposit', on_delete=models.CASCADE)
+    balance = models.CharField(max_length=255, null=True, blank=True)
+    address = models.CharField(max_length=255)
+    currency = models.CharField(max_length=255)
+    chain = models.CharField(max_length=255)
+    verify = models.BooleanField(default=False)
+    initiated_on = models.DateTimeField(default=datetime.now)
+
+
+    def __str__(self):
+        return self.balance

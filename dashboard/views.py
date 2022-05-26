@@ -33,8 +33,13 @@ def index(request):
         print(api_balance)
         dbbalance = AssetBalance(balance=api_balance)
         balance = AssetBalance.objects.all().last()
-        if api_balance == balance or balance ==  None:
+        if api_balance != balance:
             dbbalance.save()
+            del_balance = AssetBalance.objects.all()[:1]
+            for data in del_balance:
+                data.delete()
+
+        
     except:
         balance = AssetBalance.objects.all().last()
         print(f"this is from db {balance}")
