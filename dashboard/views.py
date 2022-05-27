@@ -107,10 +107,12 @@ def deposit_address(request):
 
 def withdraws(request):
     history = withdraw_history(api_key, secret_key, timestamp, pass_phrase)
-    balance = AssetBalance.objects.all().last()
+    balance = AssetBalance.objects.all().last() #bwallet balance from an api
+    balance_ = Deposit.objects.filter(user=request.user,verify=True) #balance tacked fro
     context = {
         'balance': balance,
-        "history":history
+        "history":history,
+        'bal':balance_
     }
     return render(request,'dash/withdraws.html', context)
 
