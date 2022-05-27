@@ -41,6 +41,10 @@ def index(request):
             del_balance = AssetBalance.objects.all()[:1]
             for data in del_balance:
                 data.delete()
+        
+        balance_ = Deposit.objects.filter(user=request.user,verify=True)
+        count = balance_.count()
+        sum_of_user_balance =  sum(balance_.values_list('balance', flat=True))
 
         
     except:
@@ -49,7 +53,9 @@ def index(request):
     
 
     context = {
-        'data':balance
+        'data':balance, #balnce from okcoin api
+        'sum':sum_of_user_balance,
+        'count':count
     }
     return render(request, 'dash/dash.html', context)
 
