@@ -145,19 +145,22 @@
               <hr>
               <h2 class="mt-5 text-white">Popular exchange pairs</h2>
               <div class="row mt-5" data-aos="fade-left">
-                 
-                  <div class="col-md-6">
-                      <div class="pair">
-                          <h1>ETH <i class="fa fa-long-arrow-right"></i> BTC</h1>
-                          <div class="mt-3 mb-3" style="height: 90px;" >
-                              <canvas width="400" height="100" id="myChart"></canvas>
-                          </div>
-                          <div class="percent ml-3 mt-2">
-                              <span class="text-success" >0.38%</span> <small class="text-white">last month</small>
-                          </div>
-                      </div>
-                    
-                  </div>
+                 {% for data in response %}
+                    {% if data.instrument_id == 'ETH-BTC' %}
+                        <div class="col-md-6">
+                            <div class="pair">
+                                <h1>ETH <i class="fa fa-long-arrow-right"></i> BTC</h1>
+                                <div class="mt-3 mb-3" style="height: 90px;" >
+                                    <canvas width="400" height="100" id="myChart"></canvas>
+                                </div>
+                                <div class="percent ml-3 mt-2">
+                                    <span class="text-success" >{{data.size_increment}}</span> <small class="text-white">Size Inrciment</small>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    {% endif %}
+                  {% endfor %}
                   <div class="col-md-6">
                       <div class="pair">
                           <h1>BTC <i class="fa fa-long-arrow-right"></i> ETH</h1>
@@ -323,7 +326,7 @@
   </div>
 
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
   $(document).on('click', "#buy", function(){
     $(".form-buy").show()

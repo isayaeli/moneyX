@@ -1,5 +1,4 @@
 import json
-from locale import currency
 
 from django.contrib import messages
 from django.shortcuts import redirect, render
