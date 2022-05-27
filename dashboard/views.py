@@ -163,3 +163,22 @@ def track_deposit(request):
             deposit.save()
             messages.success(request, "Your New Deposit Information has been submited please wait for confirmation to update your balance")
     return redirect('deposits')
+
+
+
+
+
+def track_withdraw(request):
+    if request.method == 'POST':
+        currency = request.POST['currency']
+        if Deposit.objects.filter(currency=currency).exists():
+            filt = Deposit.objects.filter(currency=currency).last()
+            new_balalance =  filt.balance - int(request.POST['balance'])
+            print(new_balalance)
+            dp = Deposit.objects.get(id=filt.id)
+            dp.balance = new_balalance
+            # dp.save()
+            messages.info(request, f"Your have successful withdrawn {request.POST['balance']} give us a moment we will get to you ASAP")
+        else:
+            messages.success(request, "Your do not have any balance for this token")
+    return redirect('deposits')
