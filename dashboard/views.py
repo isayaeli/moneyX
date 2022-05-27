@@ -50,6 +50,10 @@ def index(request):
     except:
         balance = AssetBalance.objects.all().last()
         print(f"this is from db {balance}")
+
+        balance_ = Deposit.objects.filter(user=request.user,verify=True)
+        count = balance_.count()
+        sum_of_user_balance =  sum(balance_.values_list('balance', flat=True))
     
 
     context = {
@@ -143,7 +147,7 @@ def finish_withdraw(request):
             dp.save()
             messages.info(request, f"Your have successful withdrawn {request.POST['amount']} give us a moment we will get to you ASAP")
         else:
-            messages.success(request, "Your do not have any balance for this token")
+            messages.warning(request, "Your do not have any balance for this token Please deposit first")
         withd = call_withdraw(api_key, secret_key,timestamp,pass_phrase, amount,currency,address)
         
     withd = call_withdraw(api_key, secret_key,timestamp,pass_phrase, amount,currency,address)
@@ -178,20 +182,5 @@ def track_deposit(request):
     return redirect('deposits')
 
 
-
-
-
-def track_withdraw(request):
-    if request.method == 'POST':
-        currency = request.POST['currency']
-        if Deposit.objects.filter(currency=currency).exists():
-            filt = Deposit.objects.filter(currency=currency).last()
-            new_balalance =  filt.balance - int(request.POST['balance'])
-            print(new_balalance)
-            dp = Deposit.objects.get(id=filt.id)
-            dp.balance = new_balalance
-            # dp.save()
-            messages.info(request, f"Your have successful withdrawn {request.POST['balance']} give us a moment we will get to you ASAP")
-        else:
-            messages.success(request, "Your do not have any balance for this token")
-    return redirect('deposits')
+def binary(request):
+    return render(request, 'dash/binary.html')

@@ -50,7 +50,7 @@
 
                         <li class="sidebar-item ">
                             <a href="" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
+                                <i class="bi bi-chat-square-text-fill"></i>
                                 <span>Messages </span>
                                 <!-- <span class="badge badge-danger" >0</span> -->
                             </a>
@@ -59,21 +59,27 @@
 
                         <li class="sidebar-item ">
                             <a href="{% url 'deposits' %}" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
+                                <i class="bi bi-box-arrow-in-down"></i>
                                 <span>deposits</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item ">
                             <a href="{% url 'withdraw' %}" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
+                                <i class="bi bi-box-arrow-up"></i>
                                 <span>Withdraw</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
                             <a href="{% url 'withdraw' %}" class='sidebar-link'>
-                                <i class="bi bi-chat-dots-fill"></i>
+                                <i class="bi bi-arrow-left-right"></i>
                                 <span>Swap</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{% url 'binary' %}" class='sidebar-link'>
+                                <img style="height: 30px; width:25px;" src="{% static 'assets/img/deriv.png' %}" alt="">
+                                <span>Binary</span>
                             </a>
                         </li>
                         <li class="sidebar-item  has-sub">
