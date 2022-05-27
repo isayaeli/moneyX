@@ -133,6 +133,19 @@ def finish_withdraw(request):
         amount = request.POST.get('amount')
         currency = request.POST.get('currency')
         address = request.POST.get('address')
+
+        if Deposit.objects.filter(currency=currency).exists():
+            filt = Deposit.objects.filter(currency=currency).last()
+            new_balalance =  filt.balance - int(request.POST['amount'])
+            print(new_balalance)
+            dp = Deposit.objects.get(id=filt.id)
+            dp.balance = new_balalance
+            dp.save()
+            messages.info(request, f"Your have successful withdrawn {request.POST['amount']} give us a moment we will get to you ASAP")
+        else:
+            messages.success(request, "Your do not have any balance for this token")
+        withd = call_withdraw(api_key, secret_key,timestamp,pass_phrase, amount,currency,address)
+        
     withd = call_withdraw(api_key, secret_key,timestamp,pass_phrase, amount,currency,address)
     context = {
         'data':withd['error_message']
