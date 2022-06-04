@@ -25,9 +25,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost', '9a00-41-222-180-250.in.ngrok.io']
 
-
+CSRF_TRUSTED_ORIGINS = ['https://9a00-41-222-180-250.in.ngrok.io']
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'channels',
     'home',
     'dashboard',
     'userauth',
@@ -67,13 +68,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #custom processors
+                'dashboard.context_processors.app_id'
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
+# ASGI_APPLICATION = "core.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -144,3 +147,5 @@ EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 OK_API_KEY = config('OK_API_KEY')
 OK_SECRETE_KEY = config('OK_SECRETE_KEY')
 PASS_PHRASE = config('PASS_PHRASE')
+
+APP_ID = config('APP_ID')

@@ -1,12 +1,19 @@
+
 import json
 
 from django.contrib import messages
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 import requests
 
-from .api_calls import call_deposit, call_withdraw, deposit_history, get_spot_balance, withdraw_history
+from userauth.models import Profile
+
+from .api_calls import call_deposit, call_withdraw, deposit_history, get_trading_pair, withdraw_history, withd
 from .config import *
-from .models import AssetBalance, Deposit, DepositHistory
+from .models import AssetBalance, BinaryWithDraw, Deposit, DepositHistory
+from django.views.decorators.http import require_http_methods
+import websocket
+import json
 # Create your views here.
 def index(request):
     try:
@@ -68,8 +75,8 @@ def deposits(request):
     saved_history = DepositHistory.objects.values('history')
     history =deposit_history(api_key, secret_key, timestamp, pass_phrase)
     save_hist = DepositHistory(history=history)
-
-
+    
+  
     saved_history = saved_history[0]['history']
     for data in history:
         for saved_data in saved_history:
@@ -180,6 +187,71 @@ def track_deposit(request):
             messages.success(request, "Your New Deposit Information has been submited please wait for confirmation to update your balance")
     return redirect('deposits')
 
+def swap(request):
+    pairs = get_trading_pair(api_key, secret_key, timestamp, pass_phrase)
+    context = {
+        'pair':pairs
+    }
+    return render(request, 'dash/swap.html', context)
 
+def trade(request):
+    return render(request, 'dash/trade.html')
+
+@require_http_methods(['GET', 'POST'])
 def binary(request):
-    return render(request, 'dash/binary.html')
+    token = request.GET.get('token1' or None)
+    if token != None:
+        profile = Profile(user=request.user, token=token)
+        profile.save()
+    token = Profile.objects.get(user=request.user)
+    # print(token.token)
+    res = withd(auth={"authorize": token.token},dataz={"balance": 1})
+    # data = json.loads(message)
+    data = json.loads(res.mymessage)
+    
+    # print(data['balance']['balance'])
+    # print(data['balance']['currency'])
+    # print(data['balance']['loginid'])
+    context ={
+        'balance': data['balance']['balance']
+    }
+    return render(request, 'dash/binary.html', context)
+
+def verify(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        type_ =  request.POST['type']
+        response_data = {}
+        token = Profile.objects.get(user=request.user)
+        res = withd(auth={"authorize": token.token},dataz={"verify_email": email,"type": type_})
+        data = json.loads(res.mymessage)
+        print(data['verify_email'])
+        response_data['result'] = "code sent successful"
+        response_data['done'] = data['verify_email']
+        
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type = 'application/json'
+        )
+
+    return HttpResponse(
+        json.dumps({'Error':"Failded to submit"}),
+        content_type = 'application/json'
+    )
+
+def binary_agent_withdraw(request):
+    if request.method == 'POST':
+        amount = request.POST['amount']
+        currency = request.POST['currency']
+        code = request.POST['code']
+
+        token = Profile.objects.get(user=request.user)
+        res = withd(auth={"authorize": token.token},dataz={"paymentagent_withdraw": 1, 'amount':amount,'currency':currency,
+                                            'paymentagent_loginid':'CR3724014','verification_code':code})
+        data = json.loads(res.mymessage)
+        print(data['error']['message'])
+        binary = BinaryWithDraw(amount=amount, currency=currency)
+        messages.info(request, f"{data['error']['message']}")
+        return redirect('binary')
+
+    return JsonResponse()

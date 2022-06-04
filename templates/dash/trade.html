@@ -1,0 +1,50 @@
+Hello addrss here{% extends 'dash/config.html' %}
+{% load static %}
+{% block contents %}
+<div id="main">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+
+    <div class="page-heading">
+        <h3>Welcome to your Dashboard</h3>
+    </div>
+    <div class="page-content">
+        <section class="row">
+            <div class="col-12 col-lg-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Swap</h4>
+                    </div>
+                    <div class="card-body" style="max-height: 550px; overflow-y: scroll;">
+                        <div class="row" >
+                            <div class="col-md-7">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <select name="oder_type" id="" class="form-control mb-3">
+                                        <option value="select">select oder type</option>
+                                        <option value="limit">Limit Order</option>
+                                        <option value="0">Market Order</option>
+                                    </select>
+                                    <input type="text" name="price" class="form-control mb-3" placeholder="price (BTC)" >
+    
+                                    <!-- <label for="amount" class=" mb-3" >Amount</label> -->
+                                    <input type="text" name="amount" class="form-control mb-3" placeholder="Amount (ETH)" >
+
+                                    <input type="text" name="amount" class="form-control mb-3" placeholder="Total (BTC)" >
+                                    <center> <button style="width:50%;" class="btn btn-primary rounded-pill btn-lg" >Finish Withdrawal</button></center>
+                                </form>
+                            </div>
+                        </div>
+             
+                        <!-- withd = call_withdraw(api_key, secret_key,timestamp,pass_phrase, amount,currency,address) -->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    {% endblock contents %}

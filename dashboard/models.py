@@ -44,5 +44,17 @@ class Deposit(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+
+
+
+class BinaryWithDraw(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.CharField(max_length=255)
+    currency = models.CharField(max_length=255)
+
+    def __str__(self):
+        return str(self.user)
+    
     
 
