@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+from datetime import timedelta
 from decouple import config
 from pathlib import Path
 
@@ -25,9 +26,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost', '9a00-41-222-180-250.in.ngrok.io']
+ALLOWED_HOSTS = ['127.0.0.1','localhost', 'a5bd-197-186-8-115.in.ngrok.io']
 
-CSRF_TRUSTED_ORIGINS = ['https://9a00-41-222-180-250.in.ngrok.io']
+CSRF_TRUSTED_ORIGINS = ['https://a5bd-197-186-8-115.in.ngrok.io']
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,11 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'channels',
+     'axes',
     'home',
     'dashboard',
     'userauth',
     'transactions',
     'exchange'
+]
+
+
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -149,3 +162,8 @@ OK_SECRETE_KEY = config('OK_SECRETE_KEY')
 PASS_PHRASE = config('PASS_PHRASE')
 
 APP_ID = config('APP_ID')
+
+
+AXES_COOLOFF_TIME = timedelta(seconds=10)
+
+AXES_ONLY_ADMIN_SITE = True

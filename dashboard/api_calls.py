@@ -143,6 +143,28 @@ def get_trading_pair(api_key, secret_key, timestamp, pass_phrase):
 
 
 
+def get_trading_info():
+    base_url = 'https://www.okcoin.com'
+    request_path = '/api/spot/v3/instruments/BTC-USDT/ticker'
+
+    # request_path = request_path + parse_params_to_str(params)
+    url = base_url + request_path
+    body = {}
+    now = datetime.datetime.now()
+    timestamp = time.mktime(now.timetuple())
+
+    # request header and body
+    # header = get_header(api_key, signature(timestamp, 'GET', request_path,body, secret_key), timestamp, pass_phrase)
+
+    # do request
+    response = requests.get(url)
+    print(response)
+    response = response.json()
+    # print(response)
+    return response
+
+
+
 
 
 

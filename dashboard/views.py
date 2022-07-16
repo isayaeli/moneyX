@@ -8,7 +8,7 @@ import requests
 
 from userauth.models import Profile
 
-from .api_calls import call_deposit, call_withdraw, deposit_history, get_trading_pair, withdraw_history, withd
+from .api_calls import call_deposit, call_withdraw, deposit_history, get_trading_info, get_trading_pair, withdraw_history, withd
 from .config import *
 from .models import AssetBalance, BinaryWithDraw, Deposit, DepositHistory
 from django.views.decorators.http import require_http_methods
@@ -189,6 +189,9 @@ def track_deposit(request):
 
 def swap(request):
     pairs = get_trading_pair(api_key, secret_key, timestamp, pass_phrase)
+    ask = get_trading_info()
+
+    print(ask['best_bid'])
     context = {
         'pair':pairs
     }
@@ -200,8 +203,10 @@ def trade(request):
 @require_http_methods(['GET', 'POST'])
 def binary(request):
     token = request.GET.get('token1' or None)
+    print(token)
     if token != None:
-        profile = Profile(user=request.user, token=token)
+        profile = Profile.objects.get(user=request.user)
+        profile.token = token
         profile.save()
     token = Profile.objects.get(user=request.user)
     # print(token.token)
@@ -225,9 +230,10 @@ def verify(request):
         token = Profile.objects.get(user=request.user)
         res = withd(auth={"authorize": token.token},dataz={"verify_email": email,"type": type_})
         data = json.loads(res.mymessage)
-        print(data['verify_email'])
-        response_data['result'] = "code sent successful"
-        response_data['done'] = data['verify_email']
+        # print(data['verify_email'])
+        response_data['success'] = "code sent successful"
+        # response_data['done'] = data['verify_email']
+        response_data['message'] = data['error']['message']
         
         return HttpResponse(
             json.dumps(response_data),

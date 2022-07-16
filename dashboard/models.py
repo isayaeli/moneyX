@@ -47,7 +47,6 @@ class Deposit(models.Model):
 
 
 
-
 class BinaryWithDraw(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.CharField(max_length=255)

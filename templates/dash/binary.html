@@ -254,10 +254,15 @@
                 $("#img").hide();
                 $('#txt').show()
             },
-            success: function(repsonse){
-                console.log(repsonse)
-                $('#txt').text('Code Sent')
-                $('#txt').css('color','green')
+            success: function(response){
+                console.log(response)
+                if (response.success){
+                    $('#txt').text('Code Sent')
+                    $('#txt').css('color','green')
+                }else{
+                    $('#txt').text('Error')
+                $('#txt').css('color','red')
+                }
             },
             error: function(error){
                 console.log(error)

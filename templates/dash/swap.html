@@ -20,35 +20,28 @@
                     </div>
                     <div class="card-body" style="max-height: 550px; overflow-y: scroll;">
                        
-                                          
-                        
-            
                         {% for data in pair %}
-                            {% if 'BTC' in data.instrument_id  %}
-                        <div class="row wallet mb-5" >
+                          
+                        <div class="row wallet mb-3" >
                             <div class="col-md-12 walet-info" style="margin-left:60px;">
                                 <div class="coin-header">
-                                    <h5>{{data.instrument_id}}</h5>
+                                    <h6>{{data.instrument_id}}</h6>
+                                    {{data.min_size}}
                                 </div>
                                 <div class="coin-balance">
                                  
                                 </div>
                                 <div class="actions">
                                     <form action="#" method="post" >
-                                        {% csrf_token %}
-                                        <input type="hidden" name="currency" value="USDT">
-                                        <button type="submit" class="btn btn-primary rounded-pill" >Swap</button>
+                                        {# csrf_token #}
+                                        <input type="hidden" name="currency" value="{{data.base_currency}}">
+                                        <button type="submit" class="btn btn-primary btn-sm rounded-pill" >Swap</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                            {% endif %}
+                           
                         {% endfor %}
-             
-
-                    
-                     
-                     
                     
                     </div>
                 </div>
@@ -87,6 +80,28 @@
                                
                             </div>
                             <div class="card-body">
+
+                               <!-- <div style="display: inline-flex;" >
+                                    <div style="width:100px; text-align: center;" >
+                                        <h6 style="border-bottom: 2px solid green; padding-bottom:10px; color: green;" >By BTC</h6>
+                                    </div>
+
+                                    <div style="width:100px; text-align: center; margin-left: 50px;" >
+                                        <h6 style="border-bottom: 2px solid red; padding-bottom:10px; color: red;" >Sell BTC</h6>
+                                    </div>
+                               </div>
+
+                               <div class="swap-form mt-3 mb-3" style="width: 250px;">
+
+                                    <form action="">
+                                        <select name="type" id="" class="form-control mb-3" >
+                                            <option value="0">Oder Type</option>
+                                            <option value="limit">Limit Order</option>
+                                            <option value="market">Market Order</option>
+                                        </select>
+                                        <input class="form-control mb-3" type="text" placeholder="price(USD) 12.000">
+                                        <input class="form-control mb-3" type="text" placeholder="amout ()">                                    </form>
+                               </div> -->
                        
                                 <table class="table" >
                                     <thead>
