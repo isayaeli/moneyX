@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import json
-from web3 import Web3
+# from web3 import Web3
 
 # url  = 'HTTP://127.0.0.1:7545'
 
